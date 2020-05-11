@@ -1,24 +1,12 @@
+/*
+	This arbitrary constant decides how much air time (iterations) is too much
+*/
 #define arbitrary_air_time_const 9
-#define arbitrary_planes_in_air_const 6
-
 
 /*
-Function name: count_planes
-Input: plane pointer pointing to head of linked list land
-Output: int, number of nodes in linked list land
-Function: counts the number of planes in air
-Logic: loops through the list and incremwnts the count variable by one for each node
+	This arbitrary constant decides how many planes in air at a time are too many
 */
-int count_planes(plane *head){
-	//stuffz
-	plane *iter_var = head;
-	int count = 0;
-	while(iter_var != NULL){
-		count++;
-		iter_var = iter_var->next;
-	}
-	return count;
-}
+#define arbitrary_planes_in_air_const 6
 
 /*
 Function name: decide
@@ -27,52 +15,25 @@ Output: character, 't' or 'l'
 Function: chooses which plane gets to use the runway
 Logic: makes decision based on whether either of the planes have an emergency situation, the number of planes in air, time of plane in air, and number of passengers
 */
-char decide(plane take_off_plane, plane landing_plane, int planes_in_air){
-	if(take_off_plane.emergency ^ landing_plane.emergency){
-		if(take_off_plane.emergency)
-			return 't';
-		else
-			return 'l';
-	}else if(take_off_plane.emergency && landing_plane.emergency){
-		if(take_off_plane.no_of_passengers > landing_plane.no_of_passengers)
-			return 't';
-		else
-			return 'l';
-	}else if(landing_plane.air_time > arbitrary_air_time_const || planes_in_air > arbitrary_planes_in_air_const){
-		return 'l';
-	}else if(take_off_plane.no_of_passengers > landing_plane.no_of_passengers){
-		return 't';
-	}else	return 'l';
-}
+char decide(plane take_off_plane, plane landing_plane, int planes_in_air);
 
 /*
-Function name:
-Input:
-Output:
-Function:
-Logic:
+Function name: random_decider
+Input: float rate
+Output: integer 
+Function: randomly decides whether a plane could successfully land/takeoff
+			(simulates natural unforeseen difficulties in landing/takeoff, like wind speed)
+Logic: Uses the rate variable to add weights to the random number generator, this is better
+		choosing a random number between 0 and 1 as that would give a 50% chance, which isn't 
+		realistic.
 */
-int random_decider(float rate){
-	int random_no = rand();
-	if(random_no % (int) (1/rate))
-		return 1;
-	return 0;
-}
+int random_decider(float rate);
 
 /*
-Function name:
-Input:
-Output:
-Function:
-Logic:
+Function name: count_msg
+Input: message pointer head
+Output: integer
+Function: Counts the number of messages 
+Logic: Linked lists
 */
-int count_msg(message *head){
-	//stuffz
-	message *iter_var = head;
-	int count = 0;
-	while(iter_var != NULL){
-		count++;
-		iter_var = iter_var->next;
-	}
-	return count;
-}
+int count_msg(message *head);

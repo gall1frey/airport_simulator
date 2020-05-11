@@ -8,15 +8,15 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "io_op.h"
+#include "ip_op.h"
 #include "decisions.h"
-#include "sort.h"
 #include "beautify.h"
 
 int main(){
 
 	srand(time(0));
 
+	//initializing most variables
 	int runways = 1,i;
 	float rate = 0.5;
 	char ch = 'x',decision;
@@ -29,12 +29,15 @@ int main(){
 	msg_head->col = 2;
 	msg_head->next = NULL;
 	
+	//Taking in setup values
 	clear_screen();
 	printf("\tEnter number of runways: ");
 	scanf("%d",&runways);
 	printf("\tEnter probability of planes failing to land/takeoff (0-1): ");
 	scanf(" %f",&rate);
 	
+	//Taking in name of the file.
+	//If no such file exists, it promots again
 	do{
 		printf("\tEnter name of data file: ");
 		scanf("%s",filename);
@@ -44,12 +47,14 @@ int main(){
 	change_text_color(2);
 	printf("\n\t\tFLIGHTS HAVE BEEN ADDED.\n");
 	change_text_color(4);
+	wait(1);
 
 	clear_screen();
 	sort_tk_off(&tk_off);
 	sort_land(&land);
 	display(tk_off,land,msg_head);
 
+	//simulation starts here
 	ch = menu();
 	while(ch != 'x'){
 		clear_screen();
@@ -133,6 +138,7 @@ int main(){
 		}
 			ch = menu();
 	}
+	//when user wants to run the simulation on its own and then quit
 	while(1){
 		sort_tk_off(&tk_off);
 		sort_land(&land);
