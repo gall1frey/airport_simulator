@@ -76,4 +76,4 @@ Bugs:
 	> The program works correctly as long as the name of the plane falls under 10 characters. This could be easily improved, but there is no point in having a plane name with
 		more than 7 characters.
 
--Mallika Sirdeshpande
+-Gall1frey
